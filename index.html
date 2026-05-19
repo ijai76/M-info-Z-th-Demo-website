@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NAME SERVER</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="is-online">
+  <nav>
+    <a href="#" class="nav-logo">NAME SERVER<span>.</span></a>
+    <div class="nav-links">
+      <a href="#server">Server</a>
+      <a href="#info">Info</a>
+    </div>
+    <a class="nav-cta" href="#server">Play</a>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-badge"><span class="badge-dot"></span>Demo server is online</div>
+        <div class="server-logo logo-fallback">MC</div>
+        <h1>NAME SERVER<br><span>Game Server</span></h1>
+        <p class="hero-sub">Description example</p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="#server">View Server</a>
+          <button class="btn-secondary" onclick="copyAddress()">Copy Address</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="server" class="server-section">
+      <div class="section-head">
+        <p class="section-label">SERVER STATUS</p>
+        <h2>Join the Minecraft server</h2>
+      </div>
+      <div class="server-card">
+        <div class="server-top">
+          <div>
+            <p class="muted">Server Address</p>
+            <h3>example.com:12345</h3>
+          </div>
+          <div class="status-pill online"><span></span><b>ONLINE</b></div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-box"><p>Player</p><h4>0/100</h4></div>
+          <div class="stat-box"><p>Detected</p><h4>Demo Server</h4></div>
+          <div class="stat-box"><p>IP</p><h4>example.com</h4></div>
+          <div class="stat-box"><p>Port</p><h4>12345</h4></div>
+          <div class="stat-box"><p>Server Location</p><h4>Demo Location</h4></div>
+          <div class="stat-box server-image-box"><p>SERVER</p><h4><img class="server-state-img" src="image/online.png" onerror="this.style.display='none'" alt="Online"> <span>Online</span></h4></div>
+        </div>
+
+        <p class="live-note">This is a GitHub Pages demo · static preview</p>
+        <button class="play-btn" onclick="playServer()">Play Server</button>
+        <div id="choiceBox" class="choice hidden">
+          <h3>Choose Minecraft</h3>
+          <button onclick="openBedrock()">Minecraft Bedrock / Mobile</button>
+          <button onclick="copyJava()">Minecraft Java</button>
+          <p>Java address will be copied because Java Edition has no official browser launch link.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="info" class="features">
+      <div class="feature-card"><div class="feature-icon">⚡</div><h3>Menu 1</h3><p>Menu 1 description</p></div>
+      <div class="feature-card"><div class="feature-icon">🛡️</div><h3>Menu 2</h3><p>Menu 2 description</p></div>
+      <div class="feature-card"><div class="feature-icon">📱</div><h3>Menu 3</h3><p>Menu 3 description</p></div>
+    </section>
+  </main>
+
+  <footer><p>©Z-th M-info</p></footer>
+
+  <script>
+    const ip = "example.com";
+    const port = "12345";
+    const bedrockLink = "minecraft://?addExternalServer=NAME%20SERVER|example.com:12345";
+
+    function isMobile() { return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent); }
+    function isWindows() { return /Windows/i.test(navigator.userAgent); }
+    function playServer() {
+      if (isMobile()) return openBedrock();
+      if (isWindows()) return document.getElementById("choiceBox").classList.remove("hidden");
+      openBedrock();
+    }
+    function openBedrock() { window.location.href = bedrockLink; }
+    async function copyAddress() {
+      try {
+        await navigator.clipboard.writeText(ip + ":" + port);
+        alert("Server address copied: " + ip + ":" + port);
+      } catch {
+        alert("Server address: " + ip + ":" + port);
+      }
+    }
+    async function copyJava() { await copyAddress(); }
+  </script>
+</body>
+</html>
